@@ -17,7 +17,6 @@ parser.add_argument('--seed', type=int, default=0)
 parser.add_argument('--max_epoch', type=int, default=10, help='max epoch for every model')
 parser.add_argument('--lr', type=float, default=0.0005)
 parser.add_argument('--batch_size', type=int, default=768)
-parser.add_argument('--drug_data', type=str, default='75')
 
 args = parser.parse_args()
 description = args.description
@@ -27,7 +26,6 @@ model_nums = args.model_nums
 seed = args.seed
 lr = args.lr
 batch_size = args.batch_size
-drug_data = args.drug_data
 
 print('seed:', seed)
 os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
@@ -42,9 +40,9 @@ torch.backends.cudnn.deterministic = True
 print('experminent description:{0}\nmodel_nums:{1}\tmax epoch:{2}\tlr:{3}\tbatch size:{4}'.format(description, model_nums, max_epoch, lr, batch_size))
 
 GDSC_drug_list = read_drug_list('GDSC')
-GDSC_drug_graph = read_drug_graph('GDSC', GDSC_drug_list, drug_data)
+GDSC_drug_graph = read_drug_graph('GDSC', GDSC_drug_list)
 TCGA_drug_list = read_drug_list('TCGA')
-TCGA_drug_graph = read_drug_graph('TCGA', TCGA_drug_list, drug_data)
+TCGA_drug_graph = read_drug_graph('TCGA', TCGA_drug_list)
 
 cwd = os.getcwd().split(r'/')[:-1]
 cwd = '/'.join(cwd)

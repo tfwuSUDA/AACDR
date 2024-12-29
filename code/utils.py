@@ -80,7 +80,7 @@ def makeDataset():
                 GDSC_data.append([int(drug_id), torch.tensor(df).float(), x])
     
     gdsc_only_dataset = LabeledDataset(GDSC_data)
-    with open(cwd + '/data/GDSC/GDSC_only_dataset2.pkl','wb')as w2:
+    with open(cwd + '/data/GDSC/GDSC_only_dataset.pkl','wb')as w2:
         pickle.dump(gdsc_only_dataset, w2)
 
     TCGA_unlabel_data = []
@@ -91,7 +91,7 @@ def makeDataset():
     TCGA_unlabel_data = np.array(TCGA_unlabel_data)
     
     tcga_unlabel_dataset = UnlabeledDataset(torch.tensor(TCGA_unlabel_data).float())
-    with open(cwd + '/data/TCGA/TCGA_unlabel_dataset2.pkl','wb')as w3:
+    with open(cwd + '/data/TCGA/TCGA_unlabel_dataset.pkl','wb')as w3:
         pickle.dump(tcga_unlabel_dataset, w3)
 
     response = pd.read_csv(cwd + '/data/TCGA/TCGA_response_new.csv', sep=',', header=0, index_col=[0])
@@ -110,7 +110,7 @@ def makeDataset():
 
     testDataset = LabeledDataset(TCGA_data)
 
-    with open(cwd + '/data/TCGA/TCGA_dataset2.pkl','wb')as w:
+    with open(cwd + '/data/TCGA/TCGA_dataset.pkl','wb')as w:
         pickle.dump(testDataset, w)
     
 def makeCNVDataset():
